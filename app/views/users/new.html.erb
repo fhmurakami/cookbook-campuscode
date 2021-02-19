@@ -1,0 +1,34 @@
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
+<%= form_with model: @user, local: true, class: 'mt-4', id: 'new_user' do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control col-md-6' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control col-md-6' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control col-md-6' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: 'form-control col-md-6' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :city %>
+    <%= f.text_field :city, class: 'form-control col-md-6' %>
+  </div>
+
+  <%= f.submit 'Criar conta', class: 'btn btn-primary' %>
+<% end %>

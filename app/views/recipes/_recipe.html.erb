@@ -1,0 +1,22 @@
+<div class="col-md-4 recipe">
+  <div class="card mb-4 shadow-sm">
+    <%= image_tag 'https://via.placeholder.com/500x255', class: 'card-img-top' %>
+    <div class="card-body">
+      <% if recipe.featured %>
+        <h1 class="h4">
+          <%= link_to recipe.title, recipe %>  <i class="fas fa-star"></i>
+        </h1>
+      <% else %>
+        <h1 class="h4">
+          <%= link_to recipe.title, recipe %>
+        </h1>
+      <% end %>
+      <ul>
+        <li><%= recipe.recipe_type.name %></li>
+        <li><%= recipe.cuisine.name %></li>
+        <li><%= recipe.difficulty %></li>
+        <li><%= recipe.cook_time_min %></li>
+      </ul>
+    </div>
+  </div>
+</div>

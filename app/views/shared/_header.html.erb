@@ -1,0 +1,9 @@
+<section class="jumbotron text-center">
+  <h1>CookBook</h1>
+  <p>Bem-vindo ao maior livro de receitas online</p>
+  <% if user_signed_in? %>
+    <p class="text-center">
+      Olá, <%= current_user.email %>
+    </p>
+  <% end %>
+</section>

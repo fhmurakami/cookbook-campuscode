@@ -1,0 +1,9 @@
+<h1><%= @cuisine.name %></h1>
+
+<% if user_signed_in? && current_user.admin %>
+  <%= link_to t('edit'), edit_cuisine_path(@cuisine),
+                         id: 'edit', class: 'btn btn-primary' %>
+  <%= link_to t('delete'), cuisine_path(@cuisine),
+                         method: :delete, id: 'delete',
+                         class: 'btn btn-danger' %>
+<% end %>

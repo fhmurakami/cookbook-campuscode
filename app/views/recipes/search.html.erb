@@ -1,0 +1,7 @@
+<h1>Resultados da pesquisa</h1>
+
+<% if @recipes.any? %>
+  <%= render partial: 'recipe', collection: @recipes %>
+<% else %>
+  <p>Nenhuma receita encontrada.</p>
+<% end %>

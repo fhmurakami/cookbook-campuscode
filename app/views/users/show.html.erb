@@ -1,0 +1,47 @@
+<h1>Dados do usuário</h1>
+
+<% if @user.photo.attached? %>
+  <%= image_tag @user.photo %>
+<% end %>
+
+<h2 class="my-4"><%= @user.name %></h2>
+<h5 class="my-3">E-mail: <%= @user.email %></h5>
+<h5 class="my-3">Cidade: <%= @user.city %></h5>
+
+<% if @user.facebook.present? %>
+  <h5><%= link_to 'Facebook', @user.facebook %></h5>  
+<% end %>
+<% if @user.twitter.present? %>
+  <h5><%= link_to 'Twitter', @user.twitter %></h5>
+<% end %>
+
+<section id="recipes">
+  <h3 class="mt-5">Receitas de <%= "#{@user.name}" %></h3>
+  <div class="row">
+  <% if @user.recipes.any? %>
+      <%= render partial: 'recipes/recipe', collection: @user.recipes %>
+  <% else %>
+    <p class="text-center col-md-12">Esse usuário não possui nenhuma receita cadastrada</p>
+  <% end %>
+  </div>
+</section>
+
+<section id="lists">
+  <h3 class="mt-5">Listas de receitas de <%= "#{@user.name}" %></h3>
+  <% if @user.recipe_lists.any? %>
+    <ul>
+      <% @user.recipe_lists.each do |list| %>
+        <li><%= link_to list.name, list %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-center">Esse usuário não possui nenhuma lista cadastrada</p>
+  <% end %>
+</section>
+
+<% if user_signed_in? && current_user == @user %>
+  <%= link_to t('.delete_account'), user_path(current_user),
+                                    method: :delete,
+                                    id: 'delete_account',
+                                    class: 'btn btn-danger' %>
+<% end %>

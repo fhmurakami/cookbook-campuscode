@@ -1,0 +1,59 @@
+<div class="row">
+  <aside class="col-md-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item list-group-item-action">
+        <h5><%= t('activerecord.models.recipe_type.other')%></h5>
+        <% if @recipe_types.any? %>
+          <ul class="list-group list-group-flush">
+          <% @recipe_types.each do |recipe_type| %>
+            <li class="list-group-item list-group-item-action">
+              <%= link_to recipe_type.name, recipe_type %>
+            </li>
+          <% end %>
+          </ul>
+        <% end %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <h5><%= t('activerecord.models.cuisine.other')%></h5>
+        <% if @cuisines.any? %>
+          <ul class="list-group list-group-flush">
+          <% @cuisines.each do |cuisine| %>
+            <li class="list-group-item list-group-item-action">
+              <%= link_to cuisine.name, cuisine %>
+            </li>
+          <% end %>
+          </ul>
+        <% end %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to 'Todas as receitas', all_recipes_path %>
+      </li>
+    </ul>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item list-group-item-action">
+        <% if user_signed_in? %>
+          <section id="lists">
+            <h3 class="h5">Minhas listas</h3>
+            <% if current_user.recipe_lists.any? %>
+              <ul class="list-group list-group-flush">
+                <% current_user.recipe_lists.each do |list| %>
+                  <li class="list-group-item list-group-item-action"><%= link_to list.name, list %></li>
+                <% end %>
+              </ul>
+            <% end %>
+            <%= link_to 'Criar lista de receitas', new_recipe_list_path %>
+          </section>
+        <% end %>
+      </li>
+    </ul>
+  </aside>
+
+  <section id="latest" class="col-md-9">
+    <h3>Últimas receitas</h3> 
+    <div class="row">
+      <% if @latest_recipes.any? %>
+        <%= render partial: 'recipe', collection: @latest_recipes %>
+      <% end %>
+    </div>
+  </section>
+</div>

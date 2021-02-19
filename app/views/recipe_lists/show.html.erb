@@ -1,0 +1,31 @@
+<% if @recipe_list.errors.any? %>
+  <% @recipe_list.errors.full_messages do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
+<h1><%= @recipe_list.name %></h1>
+<p>Criada por: <%= link_to @recipe_list.user.name, @recipe_list.user %></p>
+
+<% if @recipe_list.recipes.any? %>
+  <ul>
+    <% @recipe_list.recipes.each do |recipe| %>
+      <li id="<%= recipe.id %>">
+        <%= link_to recipe.title, recipe %>
+        <% if current_user.author?(@recipe_list) %>
+          <%= link_to t('.delete'), recipe_list_delete_recipe_path(recipe_list_id: @recipe_list.id, recipe_id: recipe.id),
+                                    method: :delete,
+                                    class: 'btn btn-danger',
+                                    id: 'delete' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if current_user.author?(@recipe_list) %>
+  <%= link_to 'Editar', edit_recipe_list_path(@recipe_list), class: 'btn btn-primary' %>
+  <%= link_to 'Excluir', recipe_list_path(@recipe_list), method: :delete,
+                                                         id: 'delete_list',
+                                                         class: 'btn btn-danger' %>
+<% end %>

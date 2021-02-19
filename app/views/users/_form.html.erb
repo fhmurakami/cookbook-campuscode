@@ -1,0 +1,29 @@
+<% if @user.errors.any? %>
+  <% @user.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
+<%= form_with model: user, local: true, class: 'mt-4' do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :city %>
+    <%= f.text_field :city, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :facebook %>
+    <%= f.text_field :facebook, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :twitter %>
+    <%= f.text_field :twitter, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :photo %>
+    <%= f.file_field :photo %>
+  </div>
+  <%= f.submit 'Editar', class: 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,17 @@
+<h1><%= @recipe_type.name %></h1>
+
+<% if @recipe_type.recipes.any? %>
+  <div class="row">
+    <%= render partial: 'recipes/recipe', collection: @recipe_type.recipes %>
+  </div>
+<% else %>
+  <p>Não encontramos nenhuma receita desse tipo</p>
+<% end %>
+
+<% if user_signed_in? && current_user.admin %>
+  <%= link_to t('edit'), edit_recipe_type_path(@recipe_type),
+                         id: 'edit', class: 'btn btn-primary' %>
+  <%= link_to t('delete'), recipe_type_path(@recipe_type),
+                         method: :delete, id: 'delete',
+                         class: 'btn btn-danger' %>
+<% end %>

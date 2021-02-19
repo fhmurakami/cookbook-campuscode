@@ -1,0 +1,42 @@
+<% if @recipe.featured %>
+  <h1><%= @recipe.title %> <i class="fas fa-star"></i></h1>
+<% else %>
+  <h1><%= @recipe.title %></h1>
+<% end %>
+
+<% if @recipe.photo.attached? %>
+  <%= image_tag @recipe.photo %>
+<% end %>
+
+<p>Criada por: <%= link_to @recipe.user.email, @recipe.user %></p>
+
+<h3>Detalhes</h3>
+
+<p><%= @recipe.recipe_type.name %></p>
+<p><%= @recipe.cuisine.name %></p>
+<p><%= @recipe.difficulty %></p>
+<p><%= @recipe.cook_time %> minutos</p>
+
+<h3>Ingredientes</h3>
+<p><%= @recipe.ingredients %></p>
+
+<h3>Como Preparar</h3>
+<p><%= @recipe.cook_method %></p>
+
+<% if user_signed_in? && current_user.author?(@recipe) %>
+  <%= link_to 'Editar', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+  <%= link_to 'Excluir', @recipe, method: :delete, class: 'btn btn-danger' %>
+<% end %>
+<%= link_to 'Voltar', root_path, class: 'btn btn-secondary' %>
+
+<!-- TODO Mudar para um select com todas as listas criadas -->
+<% if user_signed_in? && current_user.recipe_lists.any? %>
+  <% current_user.recipe_lists.each do |list| %>
+    <%= link_to "Adicionar à lista #{list.name}", recipe_to_list_path(@recipe, list_id: list), method: :post %>
+  <% end %>
+<% end %>
+
+<% if user_signed_in? && current_user.admin %>
+  <%= link_to t('.featured'), recipe_featured_path(@recipe), id: 'featured',
+                              class: 'btn btn-outline-warning ' %>
+<% end %>

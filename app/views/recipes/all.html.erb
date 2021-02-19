@@ -1,0 +1,29 @@
+<div class="row">
+  <aside class="col-md-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item list-group-item-action">
+        <h5>Tipos de receita</h5>
+        <% if @recipe_types.any? %>
+          <ul class="list-group list-group-flush">
+          <% @recipe_types.each do |recipe_type| %>
+            <li class="list-group-item list-group-item-action">
+              <%= link_to recipe_type.name, recipe_type %>
+            </li>
+          <% end %>
+          </ul>
+        <% end %>
+      </li>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to 'Últimas receitas', root_path %>
+      </li>
+    </ul>
+  </aside>
+  <section id="all" class="col-md-9">
+    <h3>Todas as receitas</h3> 
+    <div class="row">
+      <% if @recipes.any? %>
+        <%= render partial: 'recipe', collection: @recipes %>
+      <% end %>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,13 @@
+<% if recipe_type.errors.any? %>
+  <% recipe_type.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
+<%= form_with model: recipe_type, local: true, class: 'mt-4' do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name, class: 'form-control col-md-6' %>
+  </div>
+  <%= f.submit t('.submit'), id: 'commit', class: 'btn btn-primary' %>
+<% end %>
